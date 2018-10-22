@@ -1,3 +1,5 @@
+#ifndef UTILITIES_H
+#define UTILITIES_H
 uint32_t min(uint32_t a, uint32_t b) {
   if (a < b) {
     return a;
@@ -27,3 +29,4 @@ int floor_log_2(unsigned int n) {
 	if (n >= 1 << 1) {           pos +=  1; }
 	return ((n == 0) ? (-1) : pos);
 }
+#endif

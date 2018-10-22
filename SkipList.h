@@ -1,8 +1,6 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-#include "Utilities.h"
-
 #define INT_MIN -2147483648
 #define INT_MAX 2147483647
 
@@ -30,4 +28,4 @@ int find(struct SkipList* skipList, int val);
 void unlockLevels(struct Node** nodes, int topLevel);
 int insert(struct SkipList* skipList, int val);
 int validDeletion(struct Node* deletion, int idx);
-int remove(struct SkipList* skipList, int val);
+int removeNode(struct SkipList* skipList, int val);

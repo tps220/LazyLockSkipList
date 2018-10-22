@@ -1,9 +1,10 @@
 #include "SkipList.h"
+#include "Utilities.h"
 //constructor that initializes data fields of the node and its lock,
 //but does not link the node to other towers
 struct Node* constructNode(int val, int topLevel) {
   struct Node* node = (struct Node*)malloc(sizeof(struct Node));
-  node -> next = malloc(topLevel * sizeof(struct Node*));
+  node -> next = (struct Node**)malloc(topLevel * sizeof(struct Node*));
   node -> val = val;
   node -> topLevel = topLevel;
   node -> markedToDelete = 0;
@@ -36,6 +37,7 @@ struct SkipList* constructSkipList(int maxLevel) {
   tail -> fullylinked = 1;
   head -> fullylinked = 1;
   skipList -> head = head;
+  skipList -> maxLevel = maxLevel;
   return skipList;
 }
 
@@ -168,7 +170,7 @@ int validDeletion(struct Node* deletion, int idx) {
   return deletion -> topLevel == idx && deletion -> fullylinked && deletion -> markedToDelete == 0;
 }
 
-int remove(struct SkipList* skipList, int val) {
+int removeNode(struct SkipList* skipList, int val) {
   int markedToDelete = 0;
   int topLevel = -1;
   struct Node *predecessors[skipList -> maxLevel], *successors[skipList -> maxLevel];
