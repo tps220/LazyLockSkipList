@@ -22,7 +22,7 @@
  */
 
 #include "SkipList.h"
-#include <atomic_ops.h>
+#include "../libatomic_ops/atomic_ops.h"
 #include <assert.h>
 #include <getopt.h>
 #include <limits.h>
