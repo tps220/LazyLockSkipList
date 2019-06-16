@@ -80,6 +80,7 @@ int search(struct SkipList* skipList, int val, struct Node** predecessors, struc
       current = previous -> next[i];
     }
     if (idx == -1 && val == current -> val) {
+        
       idx = i;
     }
     predecessors[i] = previous;
@@ -167,7 +168,7 @@ int insert(struct SkipList* skipList, int val) {
 }
 
 int validDeletion(struct Node* deletion, int idx) {
-  return deletion -> topLevel == idx && deletion -> fullylinked && deletion -> markedToDelete == 0;
+  return deletion -> topLevel - 1 == idx && deletion -> fullylinked && deletion -> markedToDelete == 0;
 }
 
 int removeNode(struct SkipList* skipList, int val) {
@@ -176,7 +177,6 @@ int removeNode(struct SkipList* skipList, int val) {
   struct Node *predecessors[skipList -> maxLevel], *successors[skipList -> maxLevel];
   struct Node* deletion = NULL;
   int finished = 0;
-
   while (!finished) {
     //store the result of a traveral through the skip list while searching for a value
     int idx = search(skipList, val, predecessors, successors);
@@ -208,7 +208,6 @@ int removeNode(struct SkipList* skipList, int val) {
           prev_pred = previous;
         }
         valid = previous -> markedToDelete == 0 &&
-                runner -> markedToDelete == 0 &&
                 (volatile struct Node*)previous -> next[i] == (volatile struct Node*)runner;
       }
 
